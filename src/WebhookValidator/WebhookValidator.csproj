@@ -15,7 +15,7 @@
     <PackageTags>webhook;validation;payment;moniepoint;opay;flutterwave</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
-    <RepositoryUrl>https://github.com/besot/webhook-validator</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Besot/WebhookValidator</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
