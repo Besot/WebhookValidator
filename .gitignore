@@ -1,0 +1,12 @@
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# Specific ignores from before
+/tests/WebhookValidator.Tests/bin/
+/tests/WebhookValidator.Tests/obj/
+/src/WebhookValidator/bin/
+/src/WebhookValidator/obj/
+/WebhookValidator.Sample/bin/
+/WebhookValidator.Sample/obj/

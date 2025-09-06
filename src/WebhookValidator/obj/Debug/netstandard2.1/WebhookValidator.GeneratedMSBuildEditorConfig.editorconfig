@@ -1,8 +1,0 @@
-is_global = true
-build_property.RootNamespace = WebhookValidator
-build_property.ProjectDir = c:\Users\USER\Documents\Besot\WebhookValidator\src\WebhookValidator\
-build_property.EnableComHosting = 
-build_property.EnableGeneratedComInterfaceComImportInterop = 
-build_property.CsWinRTUseWindowsUIXamlProjections = false
-build_property.EffectiveAnalysisLevelStyle = 
-build_property.EnableCodeStyleSeverity = 
