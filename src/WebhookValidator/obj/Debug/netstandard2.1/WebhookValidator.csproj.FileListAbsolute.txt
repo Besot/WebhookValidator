@@ -1,0 +1,12 @@
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\bin\Debug\netstandard2.1\WebhookValidator.deps.json
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\bin\Debug\netstandard2.1\WebhookValidator.dll
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\bin\Debug\netstandard2.1\WebhookValidator.pdb
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\bin\Debug\netstandard2.1\WebhookValidator.xml
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\obj\Debug\netstandard2.1\WebhookValidator.csproj.AssemblyReference.cache
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\obj\Debug\netstandard2.1\WebhookValidator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\obj\Debug\netstandard2.1\WebhookValidator.AssemblyInfoInputs.cache
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\obj\Debug\netstandard2.1\WebhookValidator.AssemblyInfo.cs
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\obj\Debug\netstandard2.1\WebhookValidator.csproj.CoreCompileInputs.cache
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\obj\Debug\netstandard2.1\WebhookValidator.dll
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\obj\Debug\netstandard2.1\WebhookValidator.xml
+C:\Users\USER\Documents\Clearwox\WebhookValidator\src\WebhookValidator\obj\Debug\netstandard2.1\WebhookValidator.pdb

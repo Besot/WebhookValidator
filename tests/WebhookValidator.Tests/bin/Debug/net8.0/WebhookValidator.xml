@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebhookValidator</name>
+    </assembly>
+    <members>
+        <member name="T:Besot.WebhookValidator.FlutterwaveWebhookValidator">
+            <summary>
+            Validator for Flutterwave webhook requests that verifies the authenticity 
+            using HMAC-SHA256 signature validation.
+            </summary>
+        </member>
+        <member name="M:Besot.WebhookValidator.FlutterwaveWebhookValidator.Validate(System.String,System.String,System.String)">
+            <summary>
+            Validates a Flutterwave webhook request by verifying its signature.
+            </summary>
+            <param name="requestBody">The raw request body content as string.</param>
+            <param name="signatureHeader">The signature header from the webhook request (flutterwave-signature).</param>
+            <param name="secretKey">The webhook secret hash (FLW_SECRET_HASH) provided by Flutterwave.</param>
+            <returns>True if the signature is valid, false otherwise.</returns>
+            <exception cref="T:Besot.WebhookValidator.InvalidWebhookRequestException">Thrown when the signature is missing or invalid.</exception>
+        </member>
+        <member name="M:Besot.WebhookValidator.FlutterwaveWebhookValidator.ValidateSignature(System.String,System.String,System.String)">
+            <summary>
+            Validates the Flutterwave webhook signature without throwing exceptions.
+            </summary>
+            <param name="requestBody">The raw request body content as string.</param>
+            <param name="signatureHeader">The signature header from the webhook request (flutterwave-signature).</param>
+            <param name="secretKey">The webhook secret hash (FLW_SECRET_HASH) provided by Flutterwave.</param>
+            <returns>True if the signature is valid, false otherwise.</returns>
+        </member>
+        <member name="M:Besot.WebhookValidator.FlutterwaveWebhookValidator.ComputeSignature(System.String,System.String)">
+            <summary>
+            Computes the HMAC-SHA256 signature of the request body using the secret key.
+            </summary>
+            <param name="requestBody">The raw request body content as string.</param>
+            <param name="secretKey">The webhook secret hash (FLW_SECRET_HASH) provided by Flutterwave.</param>
+            <returns>The computed signature as a hexadecimal string.</returns>
+        </member>
+        <member name="M:Besot.WebhookValidator.FlutterwaveWebhookValidator.ParsePayload``1(System.String,System.String,System.String)">
+            <summary>
+            Parses the payload into a strongly-typed object after validating the signature.
+            </summary>
+            <typeparam name="T">The type to deserialize the payload to.</typeparam>
+            <param name="requestBody">The raw request body content as string.</param>
+            <param name="signatureHeader">The signature header from the webhook request (flutterwave-signature).</param>
+            <param name="secretKey">The webhook secret hash (FLW_SECRET_HASH) provided by Flutterwave.</param>
+            <returns>The deserialized payload object.</returns>
+            <exception cref="T:Besot.WebhookValidator.InvalidWebhookRequestException">Thrown when the signature is missing or invalid.</exception>
+            <exception cref="T:System.Text.Json.JsonException">Thrown when the JSON deserialization fails.</exception>
+        </member>
+        <member name="M:Besot.WebhookValidator.FlutterwaveWebhookValidator.ParsePayload(System.String,System.String,System.String)">
+            <summary>
+            Parses the payload into a dynamic object after validating the signature.
+            </summary>
+            <param name="requestBody">The raw request body content as string.</param>
+            <param name="signatureHeader">The signature header from the webhook request (flutterwave-signature).</param>
+            <param name="secretKey">The webhook secret hash (FLW_SECRET_HASH) provided by Flutterwave.</param>
+            <returns>The deserialized payload as a JsonElement.</returns>
+            <exception cref="T:Besot.WebhookValidator.InvalidWebhookRequestException">Thrown when the signature is missing or invalid.</exception>
+            <exception cref="T:System.Text.Json.JsonException">Thrown when the JSON deserialization fails.</exception>
+        </member>
+        <member name="T:Besot.WebhookValidator.InvalidWebhookRequestException">
+            <summary>
+            Exception thrown when a webhook signature is invalid or missing.
+            </summary>
+        </member>
+        <member name="M:Besot.WebhookValidator.InvalidWebhookRequestException.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Besot.WebhookValidator.InvalidWebhookRequestException"/> class.
+            </summary>
+        </member>
+        <member name="M:Besot.WebhookValidator.InvalidWebhookRequestException.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Besot.WebhookValidator.InvalidWebhookRequestException"/> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Besot.WebhookValidator.InvalidWebhookRequestException.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Besot.WebhookValidator.InvalidWebhookRequestException"/> class with a specified error message
+            and a reference to the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+            <param name="innerException">The exception that is the cause of the current exception.</param>
+        </member>
+        <member name="M:Besot.WebhookValidator.InvalidWebhookRequestException.#ctor(System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Besot.WebhookValidator.InvalidWebhookRequestException"/> class with the provider name.
+            </summary>
+            <param name="providerName">The name of the payment provider whose signature validation failed.</param>
+        </member>
+        <member name="P:Besot.WebhookValidator.InvalidWebhookRequestException.ProviderName">
+            <summary>
+            Gets the name of the payment provider whose signature validation failed.
+            </summary>
+        </member>
+        <member name="P:Besot.WebhookValidator.InvalidWebhookRequestException.Reason">
+            <summary>
+            Gets the specific reason for the signature validation failure.
+            </summary>
+        </member>
+        <member name="T:Besot.WebhookValidator.IWebhookValidator">
+            <summary>
+            Interface for webhook validators used to verify the authenticity of incoming webhooks.
+            </summary>
+        </member>
+        <member name="M:Besot.WebhookValidator.IWebhookValidator.Validate(System.String,System.String,System.String)">
+            <summary>
+            Validates a webhook request by verifying its signature against the provided secret key.
+            </summary>
+            <param name="requestBody">The raw request body content as string.</param>
+            <param name="signatureHeader">The signature header value from the webhook request.</param>
+            <param name="secretKey">The secret key used for signature verification.</param>
+            <returns>True if the signature is valid, false otherwise.</returns>
+        </member>
+        <member name="T:Besot.WebhookValidator.MoniepointWebhookValidator">
+            <summary>
+            Validator for Moniepoint webhook requests that verifies the authenticity 
+            using HMAC-SHA256 signature validation.
+            </summary>
+        </member>
+        <member name="M:Besot.WebhookValidator.MoniepointWebhookValidator.Validate(System.String,System.String,System.String)">
+            <summary>
+            Validates a Moniepoint webhook request by verifying its signature.
+            </summary>
+            <param name="requestBody">The raw request body content as string.</param>
+            <param name="signatureHeader">The signature header from the webhook request (moniepoint-webhook-signature).</param>
+            <param name="secretKey">The webhook secret key provided by Moniepoint.</param>
+            <returns>True if the signature is valid, false otherwise.</returns>
+            <exception cref="T:Besot.WebhookValidator.InvalidWebhookRequestException">Thrown when the signature is missing or invalid.</exception>
+            <remarks>
+            This method requires additional headers from the original request:
+            - webhookId: The webhook ID (moniepoint-webhook-id header)
+            - timestamp: The timestamp (moniepoint-webhook-timestamp header)
+            These values should be included in the signatureHeader parameter as a pipe-delimited string: webhookId|timestamp|signature
+            </remarks>
+        </member>
+        <member name="M:Besot.WebhookValidator.MoniepointWebhookValidator.Validate(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Alternative validation method that takes the individual components directly.
+            </summary>
+            <param name="webhookId">The Moniepoint webhook ID header value.</param>
+            <param name="timestamp">The Moniepoint webhook timestamp header value.</param>
+            <param name="requestBody">The raw request body content as string.</param>
+            <param name="signature">The Moniepoint webhook signature header value.</param>
+            <param name="secretKey">The webhook secret key provided by Moniepoint.</param>
+            <returns>True if the signature is valid, false otherwise.</returns>
+            <exception cref="T:Besot.WebhookValidator.InvalidWebhookRequestException">Thrown when the signature is missing or invalid.</exception>
+        </member>
+        <member name="T:Besot.WebhookValidator.OpayWebhookValidator">
+            <summary>
+            Validator for OPay webhook requests that verifies authenticity using RSA signature validation.
+            </summary>
+        </member>
+        <member name="M:Besot.WebhookValidator.OpayWebhookValidator.Validate(System.String,System.String,System.String)">
+            <summary>
+            Validates an OPay webhook request by verifying its RSA signature.
+            </summary>
+            <param name="requestBody">The raw request body content (paramContent from OPay).</param>
+            <param name="signatureHeader">The signature header from the webhook request in format: signature|timestamp</param>
+            <param name="opayPublicKey">The OPay public key (in Base64 format) used to verify signatures.</param>
+            <returns>True if the signature is valid, false otherwise.</returns>
+            <exception cref="T:Besot.WebhookValidator.InvalidWebhookRequestException">Thrown when the signature is missing or invalid.</exception>
+            <remarks>
+            The signatureHeader should be provided as "signature|timestamp" where:
+            - signature is the sign field from the OPay webhook request
+            - timestamp is the timestamp field from the OPay webhook request
+            </remarks>
+        </member>
+        <member name="M:Besot.WebhookValidator.OpayWebhookValidator.Validate(System.String,System.String,System.String,System.String)">
+            <summary>
+            Alternative validation method that takes the individual components directly.
+            </summary>
+            <param name="paramContent">The paramContent from the OPay webhook request.</param>
+            <param name="timestamp">The timestamp from the OPay webhook request.</param>
+            <param name="signature">The signature from the OPay webhook request.</param>
+            <param name="opayPublicKey">The OPay public key (in Base64 format) used to verify signatures.</param>
+            <returns>True if the signature is valid, false otherwise.</returns>
+            <exception cref="T:Besot.WebhookValidator.InvalidWebhookRequestException">Thrown when the signature is missing or invalid.</exception>
+        </member>
+        <member name="M:Besot.WebhookValidator.OpayWebhookValidator.DecryptPayload(System.String,System.String)">
+            <summary>
+            Decrypts the OPay webhook payload using the merchant's private key.
+            </summary>
+            <param name="encryptedPayload">The encrypted payload (paramContent from OPay).</param>
+            <param name="merchantPrivateKey">The merchant's private key (in Base64 format).</param>
+            <returns>The decrypted payload as a string.</returns>
+        </member>
+        <member name="M:Besot.WebhookValidator.OpayWebhookValidator.EncryptPayload(System.String,System.String)">
+            <summary>
+            Encrypts a payload using OPay's public key.
+            </summary>
+            <param name="payload">The payload to encrypt.</param>
+            <param name="opayPublicKey">OPay's public key (in Base64 format).</param>
+            <returns>The encrypted payload as a Base64 string.</returns>
+        </member>
+        <member name="M:Besot.WebhookValidator.OpayWebhookValidator.GenerateSignature(System.String,System.String,System.String)">
+            <summary>
+            Generates a signature for outgoing messages to OPay.
+            </summary>
+            <param name="paramContent">The content to sign.</param>
+            <param name="timestamp">The current timestamp.</param>
+            <param name="merchantPrivateKey">The merchant's private key (in Base64 format).</param>
+            <returns>The signature as a Base64 string.</returns>
+        </member>
+        <member name="T:Besot.WebhookValidator.WebhookValidatorFactory">
+            <summary>
+            Factory class to create webhook validators for different payment providers.
+            </summary>
+        </member>
+        <member name="M:Besot.WebhookValidator.WebhookValidatorFactory.CreateMoniepointValidator">
+            <summary>
+            Creates a Moniepoint webhook validator instance.
+            </summary>
+            <returns>An instance of MoniepointWebhookValidator.</returns>
+        </member>
+        <member name="M:Besot.WebhookValidator.WebhookValidatorFactory.CreateOpayValidator">
+            <summary>
+            Creates an OPay webhook validator instance.
+            </summary>
+            <returns>An instance of OpayWebhookValidator.</returns>
+        </member>
+        <member name="M:Besot.WebhookValidator.WebhookValidatorFactory.CreateFlutterwaveValidator">
+            <summary>
+            Creates a Flutterwave webhook validator instance.
+            </summary>
+            <returns>An instance of FlutterwaveWebhookValidator.</returns>
+        </member>
+        <member name="M:Besot.WebhookValidator.WebhookValidatorFactory.Create(System.String)">
+            <summary>
+            Creates a webhook validator for the specified payment provider.
+            </summary>
+            <param name="providerName">The name of the payment provider ("moniepoint" or "opay").</param>
+            <returns>An instance of the appropriate webhook validator.</returns>
+            <exception cref="T:System.ArgumentException">Thrown when an unsupported provider name is specified.</exception>
+        </member>
+    </members>
+</doc>
